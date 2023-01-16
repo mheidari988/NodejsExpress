@@ -8,10 +8,20 @@ const server = express();
 server.use(express.static(path.join(__dirname, '/public')));
 server.use(morgan('tiny'));
 
+server.set('views', './src/views');
+server.set('view engine', 'ejs');
+
 server.get('/', (req, res) => {
-    res.send('Hello from express server');
+    res.render('index', {
+        title: 'globomantics',
+        data: [
+            'First data',
+            'Second data',
+            'Third data'
+        ]
+    });
 });
 
 server.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
-})
+});
